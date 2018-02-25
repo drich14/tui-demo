@@ -29,7 +29,7 @@ class Index extends React.Component {
         <button onClick={this.signout}>Sign out</button>
       </div>
     ) : (
-      <Auth serverState={this.props.serverState} />
+      <Auth serverState={this.props.serverState || {}} />
     );
   }
 }
