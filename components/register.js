@@ -9,17 +9,15 @@ import redirect from '../lib/redirect';
 const register = ({ registerMutation, onClick }) => (
   <div>
     <form onSubmit={registerMutation}>
-      <input type="text" placeholder="Your Name" name="name" />
-      <br />
       <input type="email" placeholder="Email" name="email" />
       <br />
       <input type="password" placeholder="Password" name="password" />
       <br />
-      <button>Create account</button>
+      <button>Register</button>
     </form>
     <hr />
     <button onClick={onClick}>
-      <a>Sign in</a>
+      <a>Login</a>
     </button>
   </div>
 );
