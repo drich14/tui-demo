@@ -7,7 +7,7 @@ const vars = {
   SECRET: null,
   WEB_PORT: 3000,
   WEB_ENDPOINT: ['WEB_PORT', WEB_PORT => `http://localhost:${WEB_PORT}`],
-  APP_SECRET: 'SECRET',
+  API_SECRET: 'SECRET',
   API_PORT: 4000,
   API_ENDPOINT: ['API_PORT', API_PORT => `http://localhost:${API_PORT}`],
   DB_STAGE: 'dev',

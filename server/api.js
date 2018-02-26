@@ -28,4 +28,4 @@ const server = new GraphQLServer({
   })
 });
 
-server.start(() => console.log(`API at ${env.API_ENDPOINT}`));
+server.start(() => console.log(`> API at ${env.API_ENDPOINT}`));
