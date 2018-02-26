@@ -9,10 +9,10 @@
     "deploy:db": "prisma deploy",
     "build:web": "next build",
     "build": "npm-run-all env --parallel build:web deploy:db",
-    "start:web": "next start",
+    "start:web": "node server/web.js",
     "start:api": "node server/api.js",
     "start": "npm-run-all build --parallel start:web start:api",
-    "dev:web": "next",
+    "dev:web": "nodemon server/web.js",
     "dev:api": "nodemon server/api.js",
     "dev": "npm-run-all build --parallel dev:web dev:api",
     "test": "NODE_ENV=test ava"
@@ -43,9 +43,7 @@
     "prisma": "^1.2.8"
   },
   "ava": {
-    "require": [
-      "babel-register"
-    ],
+    "require": ["babel-register"],
     "babel": "inherit"
   },
   "resolutions": {
