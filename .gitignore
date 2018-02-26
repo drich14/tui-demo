@@ -60,3 +60,6 @@ typings/
 .next
 
 database/prisma.graphql
+database/prisma.yml
+.graphqlconfig.yml
+lib/env.js

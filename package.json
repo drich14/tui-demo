@@ -1,17 +1,20 @@
 {
   "name": "web-starter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Dylan Richardson",
   "license": "MIT",
   "private": "true",
   "scripts": {
-    "dev:web": "next",
-    "dev:api": "nodemon server/api.js",
-    "build": "next build && prisma deploy",
+    "env": "node scripts/env.js",
+    "deploy:db": "prisma deploy",
+    "build:web": "next build",
+    "build": "npm-run-all env --parallel build:web deploy:db",
     "start:web": "next start",
     "start:api": "node server/api.js",
-    "dev": "npm-run-all build --parallel dev:web dev:api",
     "start": "npm-run-all build --parallel start:web start:api",
+    "dev:web": "next",
+    "dev:api": "nodemon server/api.js",
+    "dev": "npm-run-all build --parallel dev:web dev:api",
     "test": "NODE_ENV=test ava"
   },
   "dependencies": {
@@ -19,6 +22,7 @@
     "apollo-link-context": "^1.0.7",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.3.1",
+    "dotenv": "^5.0.0",
     "graphql-yoga": "^1.4.3",
     "isomorphic-unfetch": "^2.0.0",
     "next": "^5.0.0",
@@ -26,7 +30,8 @@
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "write-yaml": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.19.1",
@@ -38,7 +43,9 @@
     "prisma": "^1.2.8"
   },
   "ava": {
-    "require": ["babel-register"],
+    "require": [
+      "babel-register"
+    ],
     "babel": "inherit"
   },
   "resolutions": {
