@@ -5,6 +5,7 @@ import Link from 'next/link';
 import gql from 'graphql-tag';
 import withData from '../lib/withData';
 import redirect from '../lib/redirect';
+import { setCookie } from '../lib/cookie';
 
 const login = ({ loginMutation, onClick }) => (
   <div>
@@ -56,11 +57,9 @@ export default compose(
               password: data.get('password')
             }
           })
-            .then(({ data: { login: { token } } }) => {
+            .then(({ data: { login: { token, user: { id } } } }) => {
               // Store the token in cookie
-              document.cookie = cookie.serialize('token', token, {
-                maxAge: 30 * 24 * 60 * 60 // 30 days
-              });
+              setCookie(token, id);
 
               // Force a reload of all the current queries now that the user is
               // logged in

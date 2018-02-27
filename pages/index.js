@@ -1,6 +1,7 @@
 import React from 'react';
 import cookie from 'cookie';
 import { withApollo, compose } from 'react-apollo';
+import { deleteCookie } from '../lib/cookie';
 import withData from '../lib/withData';
 import redirect from '../lib/redirect';
 import { getLoggedInUser, isLoggedIn } from '../lib/getLoggedInUser';
@@ -10,9 +11,7 @@ class Index extends React.Component {
   static getInitialProps = getLoggedInUser;
 
   signout = () => {
-    document.cookie = cookie.serialize('token', '', {
-      maxAge: -1 // Expire the cookie immediately
-    });
+    deleteCookie();
 
     // Force a reload of all the current queries now that the user is
     // logged in, so we don't accidentally leave any state around.

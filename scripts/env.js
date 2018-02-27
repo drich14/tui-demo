@@ -21,7 +21,9 @@ const vars = {
     'DB_STAGE',
     (DB_PORT, DB_SERVICE, DB_STAGE) =>
       `http://localhost:${DB_PORT}/${DB_SERVICE}/${DB_STAGE}`
-  ]
+  ],
+  COOKIE_TOKEN: 'token',
+  COOKIE_USER_ID: 'user_id'
 };
 
 const getVar = (vars, v) => {

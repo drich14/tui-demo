@@ -5,6 +5,7 @@ import Link from 'next/link';
 import gql from 'graphql-tag';
 import withData from '../lib/withData';
 import redirect from '../lib/redirect';
+import { setCookie } from '../lib/cookie';
 
 const register = ({ registerMutation, onClick }) => (
   <div>
@@ -32,6 +33,9 @@ export default compose(
       mutation Register($email: String!, $password: String!) {
         signup(email: $email, password: $password) {
           token
+          user {
+            id
+          }
         }
       }
     `,
@@ -53,11 +57,9 @@ export default compose(
               password: data.get('password')
             }
           })
-            .then(({ data: { signup: { token } } }) => {
+            .then(({ data: { signup: { token, user: { id } } } }) => {
               // Store the token in cookie
-              document.cookie = cookie.serialize('token', token, {
-                maxAge: 30 * 24 * 60 * 60 // 30 days
-              });
+              setCookie(token, id);
 
               // Force a reload of all the current queries now that the user is
               // logged in
