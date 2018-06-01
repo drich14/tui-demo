@@ -6,21 +6,20 @@ const vars = {
   APP: null,
   SECRET: null,
   WEB_PORT: 3000,
-  WEB_ENDPOINT: ['WEB_PORT', WEB_PORT => `http://localhost:${WEB_PORT}`],
-  API_SECRET: 'SECRET',
+  WEB_ENDPOINT: ['$WEB_PORT', wp => `http://localhost:${wp}`],
+  API_SECRET: '$SECRET',
   API_PORT: 4000,
-  API_ENDPOINT: ['API_PORT', API_PORT => `http://localhost:${API_PORT}`],
+  API_ENDPOINT: ['$API_PORT', ap => `http://localhost:${ap}`],
   DB_STAGE: 'dev',
   DB_CLUSTER: 'local',
-  DB_SERVICE: 'APP',
-  DB_SECRET: 'SECRET',
+  DB_SERVICE: '$APP',
+  DB_SECRET: '$SECRET',
   DB_PORT: 4466,
   DB_ENDPOINT: [
-    'DB_PORT',
-    'DB_SERVICE',
-    'DB_STAGE',
-    (DB_PORT, DB_SERVICE, DB_STAGE) =>
-      `http://localhost:${DB_PORT}/${DB_SERVICE}/${DB_STAGE}`
+    '$DB_PORT',
+    '$DB_SERVICE',
+    '$DB_STAGE',
+    (dp, dse, dst) => `http://localhost:${dp}/${dse}/${dst}`
   ],
   COOKIE_TOKEN: 'token',
   COOKIE_USER_ID: 'user_id'
@@ -31,8 +30,9 @@ const getVar = (vars, v) => {
     const val = vars[v];
     if (val !== null) {
       if (Array.isArray(val))
-        return val.pop()(...val.map(a => getVar(vars, a)));
-      if (val in vars) return getVar(vars, vars[v]);
+        return val.pop()(...val.map(a => getVar(vars, a.substr(1))));
+      if (typeof val === 'string' && val.substr(1) in vars)
+        return getVar(vars, val.substr(1));
       return val;
     }
     throw `Missing ${v} in .env.`;
@@ -70,6 +70,8 @@ const prismaConfig = {
   secret: process.env.DB_SECRET || process.env.SECRET,
   datamodel: 'datamodel.graphql'
 };
+
+// TODO docker compose config
 
 const logError = e => (e ? console.error(e) : null);
 

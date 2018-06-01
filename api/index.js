@@ -3,10 +3,14 @@ const { GraphQLServer } = require('graphql-yoga');
 const { importSchema } = require('graphql-import');
 const { Prisma } = require('prisma-binding');
 const { me, signup, login } = require('./auth');
+const { getSchema } = require('./schema');
+const { query } = require('./query');
 
 const resolvers = {
   Query: {
-    me
+    me,
+    getSchema,
+    query
   },
   Mutation: {
     signup,
@@ -28,4 +32,6 @@ const server = new GraphQLServer({
   })
 });
 
-server.start(() => console.log(`> API at ${env.API_ENDPOINT}`));
+server.start(() =>
+  console.log(`> API at ${env.API_ENDPOINT}\n> DB at ${env.DB_ENDPOINT}`)
+);

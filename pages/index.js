@@ -1,13 +1,13 @@
-import React from 'react';
+import { Component } from 'react';
 import cookie from 'cookie';
-import { withApollo, compose } from 'react-apollo';
 import { deleteCookie } from '../lib/cookie';
 import withData from '../lib/withData';
 import redirect from '../lib/redirect';
 import { getLoggedInUser, isLoggedIn } from '../lib/getLoggedInUser';
 import Auth from '../components/auth';
+import Link from 'next/link';
 
-class Index extends React.Component {
+class Index extends Component {
   static getInitialProps = getLoggedInUser;
 
   signout = () => {
@@ -25,6 +25,8 @@ class Index extends React.Component {
     return isLoggedIn(this.props) ? (
       <div>
         Hello {this.props.me.id}!<br />
+        <Link href="/demo">demo</Link>
+        <br />
         <button onClick={this.signout}>Sign out</button>
       </div>
     ) : (
@@ -33,4 +35,4 @@ class Index extends React.Component {
   }
 }
 
-export default compose(withData, withApollo)(Index);
+export default withData(Index);

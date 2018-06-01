@@ -7,9 +7,11 @@
   "private": "true",
   "scripts": {
     "env": "node scripts/env.js",
-    "deploy:db": "prisma deploy",
-    "build:web": "next build",
-    "build": "npm-run-all env --parallel build:web deploy:db",
+    "deploy:db": "yarn prisma deploy",
+    "build:next": "yarn next build",
+    "build:web": "yarn babel web -d build-web",
+    "build:api": "yarn babel api -d build-api",
+    "build": "npm-run-all env --parallel build:next deploy:db",
     "start:web": "node web/index.js",
     "start:api": "node api/index.js",
     "start": "npm-run-all build --parallel start:web start:api",
@@ -24,6 +26,8 @@
     "bcryptjs": "^2.4.3",
     "cookie": "^0.3.1",
     "dotenv": "^5.0.0",
+    "graphql-request": "^1.6.0",
+    "graphql-tag": "^2.9.2",
     "graphql-yoga": "^1.4.3",
     "isomorphic-unfetch": "^2.0.0",
     "next": "^5.0.0",
@@ -33,16 +37,20 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "styled-components": "^3.1.6",
+    "styled-jsx": "^2.2.6",
+    "typed-ui": "0.2.7",
     "write-yaml": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.19.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "clear-require": "^2.0.0",
     "glob": "^7.1.2",
     "graphql-cli": "^2.15.7",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.10.2",
-    "prisma": "^1.2.8"
+    "prisma": "1.6"
   },
   "ava": {
     "require": [
