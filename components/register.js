@@ -82,4 +82,4 @@ const registerOptions = {
   })
 };
 
-export default withData(Register, registerMutation);
+export default withData(Register, graphql(registerMutation, registerOptions));

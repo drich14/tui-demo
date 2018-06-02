@@ -55,5 +55,3 @@ export const query = (url, query) =>
 		Query(getName(query)),
 		graphql(queryQuery, usersOptions(url, query))
 	);
-
-
