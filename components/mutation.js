@@ -29,7 +29,7 @@ const withMutation = (url, mutation) =>
 		}
 	);
 
-const handleLoadingError = mutation => WC =>
+const withHandler = mutation => WC =>
 	class Handler extends Component {
 		constructor(props) {
 			super(props);
@@ -69,7 +69,7 @@ const makeMutation = ({ url, mutation }) =>
 		withData,
 		withMutation(url, mutation),
 		withSchema(url),
-		handleLoadingError(mutation)
+		withHandler(mutation)
 	)(PutMutation(mutation));
 
 export const Mutation = props => {

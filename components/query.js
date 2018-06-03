@@ -49,7 +49,7 @@ export const withSchema = url =>
 		}
 	);
 
-const handleLoadingError = WC => ({ query, getSchema, ...props }) => (
+export const withHandler = WC => ({ query, getSchema, ...props }) => (
 	<div>
 		{(query && query.loading) || (getSchema && getSchema.loading) ? (
 			'loading'
@@ -72,7 +72,7 @@ const makeQuery = ({ url, query }) =>
 		withData,
 		withQuery(url, query),
 		withSchema(url),
-		handleLoadingError
+		withHandler
 	)(PutQuery(query));
 
 export const Query = props => {

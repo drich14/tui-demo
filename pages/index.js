@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import cookie from 'cookie';
 import { deleteCookie } from '../lib/cookie';
 import withData from '../lib/withData';
