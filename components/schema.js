@@ -1,5 +1,5 @@
 import { compose } from 'react-apollo';
 import { withData } from '../lib/withData';
-import Mutation from '../lib/mutation';
+import Schema from '../lib/schema';
 
-export default compose(withData)(Mutation);
+export default compose(withData)(Schema);

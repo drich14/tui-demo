@@ -1,8 +1,13 @@
-import { Mutation } from '../components/mutation';
+import Action from '../components/action';
 
 export default () => (
-	<Mutation
-		url="https://us1.prisma.sh/dylan-richardson-59e89b/hew/dev"
-		mutation={'mutation M { createUser(data: { name: "x" }) { id name } }'}
-	/>
+	<div>
+		<h1>Mutation</h1>
+		<Action
+			url="https://us1.prisma.sh/dylan-richardson-59e89b/hew/dev"
+			action={
+				'mutation M { createUser(data: { name: "y" }) { id name } }'
+			}
+		/>
+	</div>
 );
