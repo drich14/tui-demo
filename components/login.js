@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, withApollo, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import cookie from 'cookie';
 import Link from 'next/link';
 import gql from 'graphql-tag';
@@ -82,4 +82,7 @@ const loginOptions = {
   })
 };
 
-export default withData(Login, graphql(loginMutation, loginOptions));
+export default compose(
+  withData,
+  graphql(loginMutation, loginOptions)
+)(Login);

@@ -3,18 +3,18 @@ const { GraphQLServer } = require('graphql-yoga');
 const { importSchema } = require('graphql-import');
 const { Prisma } = require('prisma-binding');
 const { me, signup, login } = require('./auth');
-const { getSchema } = require('./schema');
-const { query } = require('./query');
+const { getSchema, request } = require('./schema');
 
 const resolvers = {
   Query: {
     me,
     getSchema,
-    query
+    query: request
   },
   Mutation: {
     signup,
-    login
+    login,
+    mutate: request
   }
 };
 
